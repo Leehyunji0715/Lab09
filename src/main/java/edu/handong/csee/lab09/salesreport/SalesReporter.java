@@ -22,14 +22,23 @@ public class SalesReporter {
 		}
 	}
 	void computeStats() {
-		double average ,sum = 0;
+		double sum = 0,currentBiggestComparecValue=0;
 		for(int i=0;i<numberOfAssociate;i++) {
 			sum += team[i].getmSales();
 		}
-		average = sum/3.0;
-		System.out.println("Average sales per associate is $"+average);
-		
+		maverageSales = sum/3.0;
+		System.out.println("Average sales per associate is $"+maverageSales);
+		for(int i=0;i<numberOfAssociate;i++) {
+			if(team[i].getmSales()>currentBiggestComparecValue) {
+				currentBiggestComparecValue = team[i].getmSales();
+			}
+		}
+		for(int i=0;i<numberOfAssociate;i++) {
+			System.out.println("The highest sales figure is $"+currentBiggestComparecValue);
+		}
+		mhighestSales = currentBiggestComparecValue;
 	}
+	
 	void displayResults() {
 		
 	}
