@@ -5,6 +5,7 @@ public class SalesReporter {
 	private double maverageSales;
 	private SalesAssociate[] team;
 	private int numberOfAssociate;
+	int biggestPersonNum;
 	
 	void getData() {
 		Scanner input = new Scanner(System.in);
@@ -23,23 +24,27 @@ public class SalesReporter {
 	}
 	void computeStats() {
 		double sum = 0,currentBiggestComparecValue=0;
-		for(int i=0;i<numberOfAssociate;i++) {
+		int i;
+		for(i=0;i<numberOfAssociate;i++) {
 			sum += team[i].getmSales();
 		}
 		maverageSales = sum/3.0;
 		System.out.println("Average sales per associate is $"+maverageSales);
-		for(int i=0;i<numberOfAssociate;i++) {
+		for(i=0;i<numberOfAssociate;i++) {
 			if(team[i].getmSales()>currentBiggestComparecValue) {
 				currentBiggestComparecValue = team[i].getmSales();
 			}
 		}
-		for(int i=0;i<numberOfAssociate;i++) {
+		for(i=0;i<numberOfAssociate;i++) {
 			System.out.println("The highest sales figure is $"+currentBiggestComparecValue);
 		}
 		mhighestSales = currentBiggestComparecValue;
+		biggestPersonNum = i-1;
 	}
 	
 	void displayResults() {
+		System.out.println("The following had the highest sales: ");
+		System.out.printf("Name : %s",team[biggestPersonNum].getmName());
 		
 	}
 
