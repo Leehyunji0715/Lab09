@@ -11,14 +11,16 @@ public class SalesReporter {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter number of sales associates : ");
 		numberOfAssociate = input.nextInt();
+		input.nextLine();
 		team = new SalesAssociate[numberOfAssociate];
 		for(int i=0;i<numberOfAssociate;i++) {
 			System.out.println("Enter data for associate number "+(i+1));
 			System.out.print("Enter name of sales associate: ");
 			team[i] = new SalesAssociate();
-			team[i].setmName(input.next());//salesMan[i].setmName(input.next());
+			team[i].setmName(input.nextLine());//salesMan[i].setmName(input.next());
 			System.out.print("Enter associate's sales: ");
 			team[i].setmSales(input.nextInt());
+			input.nextLine();
 		}
 	}
 	void computeStats() {
