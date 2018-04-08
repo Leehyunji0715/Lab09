@@ -43,9 +43,26 @@ public class SalesReporter {
 	}
 	
 	void displayResults() {
+		int j;
+		SalesAssociate orderedTeam[] = new SalesAssociate[numberOfAssociate];
+		for(int i=0;i<numberOfAssociate;i++) {
+			for(j=i+1;j<numberOfAssociate;j++) {
+				if(team[i].getmSales()<team[j].getmSales()) {
+					orderedTeam[i].setmSales(team[j].getmSales());
+				}
+			}
+			orderedTeam[i].setmName(team[j].getmName());
+		}
 		System.out.println("The following had the highest sales: ");
 		System.out.printf("Name : %s",team[biggestPersonNum].getmName());
-		
+		System.out.printf("Sales : $%f \n",team[biggestPersonNum].getmSales());
+		System.out.printf("$%f above the average\n",team[biggestPersonNum].getmSales()-maverageSales);
+		System.out.println("The rest performed as follows : ");
+		for(int i = 1;i<numberOfAssociate;i++) {
+			System.out.printf("Name : %s",orderedTeam[i].getmName());
+			System.out.printf("Sales : $%f \n",orderedTeam[i].getmSales());
+			System.out.printf("$%f above the average\n",orderedTeam[i].getmSales()-maverageSales);
+		}
 	}
 
 }
