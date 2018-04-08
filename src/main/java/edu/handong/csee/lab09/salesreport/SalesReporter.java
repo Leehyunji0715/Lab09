@@ -36,7 +36,7 @@ public class SalesReporter {
 			}
 		}
 		//for(i=0;i<numberOfAssociate;i++) {
-			System.out.printf("The highest sales figure is $%.1f",currentBiggestComparecValue);
+			System.out.printf("The highest sales figure is $%.1f\n\n",currentBiggestComparecValue);
 		//}
 		mhighestSales = currentBiggestComparecValue;
 	}
@@ -44,24 +44,29 @@ public class SalesReporter {
 	void displayResults() {
 		int j;
 		SalesAssociate orderedTeam[] = new SalesAssociate[numberOfAssociate];
+		System.out.println("The following had the highest sales ");
+		System.out.printf("Name : %s\n",team[biggestPersonNum].getmName());
+		System.out.printf("Sales : $%.1f \n",team[biggestPersonNum].getmSales());
+		System.out.printf("$%.1f above the average\n\n",team[biggestPersonNum].getmSales()-maverageSales);
 		for(int i=0;i<numberOfAssociate;i++) {
 			orderedTeam[i] = new SalesAssociate();
 			for(j=i+1;j<numberOfAssociate;j++) {
 				if(team[i].getmSales()<team[j].getmSales()) {
 					orderedTeam[i].setmSales(team[j].getmSales());
+					orderedTeam[i].setmName(team[j].getmName());
+					team[j].setmSales(team[i].getmSales());
+					team[j].setmName(team[i].getmName());
+					team[i].setmSales(orderedTeam[i].getmSales());
+					team[i].setmName(orderedTeam[i].getmName());
 				}
 			}
-			orderedTeam[i].setmName(team[j].getmName());
+			//orderedTeam[i].setmName(team[j].getmName());
 		}
-		System.out.println("The following had the highest sales: ");
-		System.out.printf("Name : %s",team[biggestPersonNum].getmName());
-		System.out.printf("Sales : $%.1f \n",team[biggestPersonNum].getmSales());
-		System.out.printf("$%f above the average\n",team[biggestPersonNum].getmSales()-maverageSales);
 		System.out.println("The rest performed as follows : ");
 		for(int i = 1;i<numberOfAssociate;i++) {
-			System.out.printf("Name : %s",orderedTeam[i].getmName());
-			System.out.printf("Sales : $%f \n",orderedTeam[i].getmSales());
-			System.out.printf("$%f above the average\n",orderedTeam[i].getmSales()-maverageSales);
+			System.out.printf("Name : %s\n",team[i].getmName());
+			System.out.printf("Sales : $%.1f \n",team[i].getmSales());
+			System.out.printf("$%.1f above the average\n",team[i].getmSales()-maverageSales);
 		}
 	}
 
