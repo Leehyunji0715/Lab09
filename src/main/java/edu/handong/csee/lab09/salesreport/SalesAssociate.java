@@ -7,7 +7,7 @@ public class SalesAssociate {
 	public String getmName() {
 		return mName;
 	}
-	public void setmName(String string) {
+	void setmName(String string) {
 		this.mName = string;
 	}
 	public double getmSales() {
