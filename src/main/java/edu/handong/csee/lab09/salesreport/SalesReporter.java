@@ -1,23 +1,40 @@
 package edu.handong.csee.lab09.salesreport;
-import java.util.Scanner;
-public class SalesReporter {
-	private double mhighestSales;
-	private double maverageSales;
-	private int numberOfAssociate;
-	private SalesAssociate[] team;
-	int biggestPersonNum;
+import java.util.Scanner;//to use Scanner, import this
+/**
+ * This class informs user number of sales associates and how much they earn. And compare among those salers.
+ * This class has mhighestSales, maverageSales, numberOfAssociate, team, biggestPersonNum members.
+ * mhighestSales is private modifier and double type. It has value of highest figure of sales.
+ * maverageSales  is private modifier and double type. It has value of average about total sales.
+ * numberOfAssociate is private modifier and integer type. It means number of associates.
+ * team is private modifier and array of class named SalesAssociate
+ * biggestPersonNum is index of salesAssociate who reaches the highest sales
+ * This class has getData(), computeStats() and displayResults() methods
+ * getData() returns nothing, and it gets data from user
+ * computeStats() returns nothing, and it shows about average sales and the highest sales
+ * displayResults() returns nothing, and it shows person who sales the most and following rest of salers.
+ * 
+ * @author leehyunji0715
+ *
+ */
+public class SalesReporter {//This is public modifier class
 	
-	void getData() {
-		Scanner input = new Scanner(System.in);
-		System.out.print("Enter number of sales associates : ");
-		numberOfAssociate = input.nextInt();
-		input.nextLine();
-		team = new SalesAssociate[numberOfAssociate];
-		for(int i=0;i<numberOfAssociate;i++) {
-			System.out.println("Enter data for associate number "+(i+1));
-			System.out.print("Enter name of sales associate: ");
-			team[i] = new SalesAssociate();
-			team[i].setmName(input.nextLine());//salesMan[i].setmName(input.next());
+	private double mhighestSales;//call variable that is private modifier and double type
+	private double maverageSales;//call variable that is private modifier and double type
+	private int numberOfAssociate;//call variable that is private modifier and integer type
+	private SalesAssociate[] team;//call private modifier and array of SalesAssociate class.
+	int biggestPersonNum;//call variable that is integer type.
+	
+	void getData() {//this returns nothing
+		Scanner input = new Scanner(System.in);//instantiate Scanner naming 'input'
+		System.out.print("Enter number of sales associates : ");//print out that enter number of sales associate
+		numberOfAssociate = input.nextInt();//enter integer to numberOfAssociate
+		input.nextLine();//remove blank by receiving it
+		team = new SalesAssociate[numberOfAssociate];//instantiate 'team' array and its size is 'numberOfAssociate'
+		for(int i=0;i<numberOfAssociate;i++) {//repeat 'numberOfAssociate' times
+			System.out.println("Enter data for associate number "+(i+1));//informs that (current index+1) of loop
+			System.out.print("Enter name of sales associate: ");//print out to enter name of sales associate
+			team[i] = new SalesAssociate();//null pointer exception
+			team[i].setmName(input.nextLine());//set a name of associate
 			System.out.print("Enter associate's sales: ");
 			team[i].setmSales(input.nextInt());
 			input.nextLine();
@@ -37,9 +54,7 @@ public class SalesReporter {
 				biggestPersonNum = i;
 			}
 		}
-		//for(i=0;i<numberOfAssociate;i++) {
 			System.out.printf("The highest sales figure is $%.1f\n\n",currentBiggestComparecValue);
-		//}
 		mhighestSales = currentBiggestComparecValue;
 	}
 	

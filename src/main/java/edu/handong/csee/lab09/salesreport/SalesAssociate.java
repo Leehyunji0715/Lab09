@@ -1,5 +1,11 @@
 package edu.handong.csee.lab09.salesreport;
-
+/**
+ * 
+ * 
+ * 
+ * @author leehyunji0715
+ *
+ */
 public class SalesAssociate {
 	private String mName;
 	private double mSales;
