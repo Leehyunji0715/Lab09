@@ -13,6 +13,14 @@ package edu.handong.csee.lab09.salesreport;
  *
  */
 public class SalesAssociate {//This is public class named SalesAssociate
+	SalesAssociate(String name, double sales){
+		setmName(name);
+		setmSales(sales);
+	}
+	SalesAssociate(){
+		mName = "";
+		mSales = 0;	
+	}
 	private String mName;// call private modifier and String class type named mName 
 	private double mSales;// call private modifier and double type named mSales
 	

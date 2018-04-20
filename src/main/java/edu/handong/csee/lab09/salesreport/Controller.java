@@ -2,7 +2,6 @@ package edu.handong.csee.lab09.salesreport;
 /**
  * This class is for operating SalesAssociate and SalesReporter class
  * This class has main() method
- * 
  * @author leehyunji0715
  *
  */
