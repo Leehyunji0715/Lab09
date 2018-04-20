@@ -1,5 +1,6 @@
 package edu.handong.csee.lab09.salesreport;
 import java.util.Scanner;//to use Scanner, import this
+import java.util.ArrayList;
 /**
  * This class informs user number of sales associates and how much they earn. And compare among those salers.
  * This class has mhighestSales, maverageSales, numberOfAssociate, team, biggestPersonNum members.
@@ -21,36 +22,49 @@ public class SalesReporter {//This is public modifier class
 	private double mhighestSales;//call variable that is private modifier and double type
 	private double maverageSales;//call variable that is private modifier and double type
 	private int numberOfAssociate;//call variable that is private modifier and integer type
-	private SalesAssociate[] team;//call private modifier and array of SalesAssociate class.
+	private ArrayList<SalesAssociate> team = new ArrayList<SalesAssociate>();//call private modifier and arrayList of SalesAssociate class.
+	private SalesAssociate forArrayList = new SalesAssociate();
 	int biggestPersonNum;//call variable that is integer type.
-	
+	boolean done=false;
+	int i=0;
 	void getData() {//this returns nothing
 		Scanner input = new Scanner(System.in);//instantiate Scanner naming 'input'
-		System.out.print("Enter number of sales associates : ");//print out that enter number of sales associate
-		numberOfAssociate = input.nextInt();//enter integer to numberOfAssociate
-		input.nextLine();//remove 'enter' by receiving it
-		team = new SalesAssociate[numberOfAssociate];//instantiate 'team' array and its size is 'numberOfAssociate'
-		for(int i=0;i<numberOfAssociate;i++) {//repeat 'numberOfAssociate' times
-			System.out.println("Enter data for associate number "+(i+1));//informs that (current index+1) of loop
+		//input.nextLine();//remove 'enter' by receiving it
+		//for(int i=0;i<numberOfAssociate;i++) {//repeat 'numberOfAssociate' times
+		while(!done) {
+			//System.out.println("Enter data for associate number "+(i+1));//informs that (current index+1) of loop
 			System.out.print("Enter name of sales associate: ");//print out to enter name of sales associate
-			team[i] = new SalesAssociate();//null pointer exception
-			team[i].setmName(input.nextLine());//set a name of associate of worker in current index
+			forArrayList.setmName(input.nextLine());
+			//team.get(i).setmName(input.nextLine());
 			System.out.print("Enter associate's sales: ");//print out to set amount of sales of worker
-			team[i].setmSales(input.nextInt());//set amount of sales of worker in current index
+			//team.get(i).setmSales(input.nextInt());//set amount of sales of worker in current index
+			forArrayList.setmSales(input.nextInt());
 			input.nextLine();//remove 'enter' by receiving it
+			team.add(i,forArrayList);
+			System.out.print("Do you want to get additional data? : ");
+			String ans = input.nextLine ();
+            if (!ans.equalsIgnoreCase ("ye"))
+                done = true;
+			 i++;
 		}
+		
 	}
 	void computeStats() {//returns nothing
 		double sum = 0,currentBiggestComparecValue=0;//initiate double type 'sum' and 'currentBiggestComparecValue' to 0, currentBiggestComparecValue is for comparing current index of sale value
 		int i;//call integer 'i'
-		for(i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
-			sum += team[i].getmSales();//add mSales to previous value of 'sum'
+		//for(i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
+		for(i=0;i<team.size();i++) {
+			sum += team.get(i).getmSales();//add mSales to previous value of 'sum'
+			System.out.println(sum);
+			System.out.println("size?"+team.size());
 		}
-		maverageSales = (sum/numberOfAssociate);//calculate average
+		//maverageSales = (sum/numberOfAssociate);//calculate average
+		maverageSales = (sum/team.size());//calculate average
 		System.out.println("Average sales per associate is $"+maverageSales);//print out 'maverageSales' of total associates
-		for(i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
-			if(team[i].getmSales()>currentBiggestComparecValue) {//if current index of associate's sale is bigger than currentBiggestComparecValue
-				currentBiggestComparecValue = team[i].getmSales();//input value to currentBiggestComparecValue
+		//for(i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
+		for(i=0;i<team.size();i++) {
+			if(team.get(i).getmSales()>currentBiggestComparecValue) {//if current index of associate's sale is bigger than currentBiggestComparecValue
+				currentBiggestComparecValue = team.get(i).getmSales();//input value to currentBiggestComparecValue
 				biggestPersonNum = i;//and save the index of this associate
 			}
 		}
@@ -62,27 +76,28 @@ public class SalesReporter {//This is public modifier class
 		int j;//call integer 'j'
 		SalesAssociate tempTeam[] = new SalesAssociate[numberOfAssociate];//instantiate SalesAssociate in array named tempTeam
 		System.out.println("The following had the highest sales ");//informs that will show highest sales
-		System.out.printf("Name : %s\n",team[biggestPersonNum].getmName());//print out name which person sales the most
-		System.out.printf("Sales : $%.1f \n",team[biggestPersonNum].getmSales());//print out sales that sell the most
-		System.out.printf("$%.1f above the average\n\n",team[biggestPersonNum].getmSales()-maverageSales);//print out value above average
+		System.out.printf("Name : %s\n",team.get(biggestPersonNum).getmName());//print out name which person sales the most
+		System.out.printf("Sales : $%.1f \n",team.get(biggestPersonNum).getmSales());//print out sales that sell the most
+		System.out.printf("$%.1f above the average\n\n",team.get(biggestPersonNum).getmSales()-maverageSales);//print out value above average
 		for(int i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
 			tempTeam[i] = new SalesAssociate();//initiate SalesAssociate array named tempTeam 
-			for(j=i+1;j<numberOfAssociate;j++) {//loop in loop, repeat (numberOfAssociate-i-1) times
-				if(team[i].getmSales()<team[j].getmSales()) {//if current sale figure is smaller than rest
-					tempTeam[i].setmSales(team[j].getmSales());//save value to tempTeam temporaily
-					tempTeam[i].setmName(team[j].getmName());//save String value to tempTeam temporaily
-					team[j].setmSales(team[i].getmSales());//input sales value to which has bigger value
-					team[j].setmName(team[i].getmName());//input String name to which has bigger value
-					team[i].setmSales(tempTeam[i].getmSales());//input j index value to current one
-					team[i].setmName(tempTeam[i].getmName());;//input j index String value to current one
+			//for(j=i+1;j<numberOfAssociate;j++) {//loop in loop, repeat (numberOfAssociate-i-1) times
+			for(j=i+1;j<team.size();j++) {
+				if(team.get(i).getmSales()<team.get(j).getmSales()) {//if current sale figure is smaller than rest
+					tempTeam[i].setmSales(team.get(j).getmSales());//save value to tempTeam temporaily
+					tempTeam[i].setmName(team.get(j).getmName());//save String value to tempTeam temporaily
+					team.get(j).setmSales(team.get(i).getmSales());//input sales value to which has bigger value
+					team.get(j).setmName(team.get(i).getmName());//input String name to which has bigger value
+					team.get(j).setmSales(tempTeam[i].getmSales());//input j index value to current one
+					team.get(j).setmName(tempTeam[i].getmName());;//input j index String value to current one
 				}
 			}
 		}
 		System.out.println("The rest performed as follows : ");//informs that print out following associate according to figure of sales
 		for(int i = 1;i<numberOfAssociate;i++) {//repeat numberOfAssociate-1 times
-			System.out.printf("Name : %s\n",team[i].getmName());//print out Name
-			System.out.printf("Sales : $%.1f \n",team[i].getmSales());//print out sales figure
-			System.out.printf("$%.1f above the average\n",team[i].getmSales()-maverageSales);//print out how much value above average
+			System.out.printf("Name : %s\n",team.get(i).getmName());//print out Name
+			System.out.printf("Sales : $%.1f \n",team.get(i).getmSales());//print out sales figure
+			System.out.printf("$%.1f above the average\n",team.get(i).getmSales()-maverageSales);//print out how much value above average
 		}
 	}
 
