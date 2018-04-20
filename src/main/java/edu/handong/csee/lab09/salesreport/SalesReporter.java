@@ -9,7 +9,6 @@ import java.util.ArrayList;//to use arrayList, import this
  * team is private modifier and array of class named SalesAssociate
  * biggestPersonNum is index of salesAssociate who reaches the highest sales
  * forArrayList is SalesAssociate class variable to input value of SalesAssociate
- * done
  * This class has getData(), computeStats() and displayResults() methods
  * getData() returns nothing, and it gets data from user
  * computeStats() returns nothing, and it shows about average sales and the highest sales
@@ -24,10 +23,10 @@ public class SalesReporter {//This is public modifier class
 	private int numberOfAssociate;//call variable that is private modifier and integer type
 	private ArrayList<SalesAssociate> team = new ArrayList<SalesAssociate>();//call private modifier and arrayList of SalesAssociate class.
 	int biggestPersonNum;//call variable that is integer type.
-	boolean done=false;//boolean type named 'done' 
 
 	void getData() {//this returns nothing
 		Scanner input = new Scanner(System.in);//instantiate Scanner naming 'input'
+		boolean done=false;//boolean type named 'done' 
 		double sale;// call double type variable named sale
 		String name;//call String class type to input name
 		while(!done) {//repeat loop while done would be true
