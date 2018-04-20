@@ -49,14 +49,9 @@ public class SalesReporter {//This is public modifier class
 		int i;//call integer 'i'
 		for(i=0;i<team.size();i++) {
 			sum += team.get(i).getmSales();//add mSales to previous value of 'sum'
-			System.out.println(sum);
-			System.out.println("size?"+team.size());
-			System.out.println("name" + team.get(i).getmName());
-
 		}
 		maverageSales = (sum/team.size());//calculate average
 		System.out.println("Average sales per associate is $"+maverageSales);//print out 'maverageSales' of total associates
-		//for(i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
 		for(i=0;i<team.size();i++) {
 			if(team.get(i).getmSales()>currentBiggestComparecValue) {//if current index of associate's sale is bigger than currentBiggestComparecValue
 				currentBiggestComparecValue = team.get(i).getmSales();//input value to currentBiggestComparecValue
