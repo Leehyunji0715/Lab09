@@ -29,21 +29,16 @@ public class SalesReporter {//This is public modifier class
 	int i=0;
 	void getData() {//this returns nothing
 		Scanner input = new Scanner(System.in);//instantiate Scanner naming 'input'
-		//input.nextLine();//remove 'enter' by receiving it
-		//for(int i=0;i<numberOfAssociate;i++) {//repeat 'numberOfAssociate' times
 		while(!done) {
-			//System.out.println("Enter data for associate number "+(i+1));//informs that (current index+1) of loop
 			System.out.print("Enter name of sales associate: ");//print out to enter name of sales associate
 			forArrayList.setmName(input.nextLine());
-			//team.get(i).setmName(input.nextLine());
 			System.out.print("Enter associate's sales: ");//print out to set amount of sales of worker
-			//team.get(i).setmSales(input.nextInt());//set amount of sales of worker in current index
 			forArrayList.setmSales(input.nextInt());
 			input.nextLine();//remove 'enter' by receiving it
-			team.add(i,forArrayList);
+			team.add(forArrayList);
 			System.out.print("Do you want to get additional data? : ");
 			String ans = input.nextLine ();
-            if (!ans.equalsIgnoreCase ("ye"))
+            if (!ans.equalsIgnoreCase ("yes"))
                 done = true;
 			 i++;
 		}
@@ -52,13 +47,11 @@ public class SalesReporter {//This is public modifier class
 	void computeStats() {//returns nothing
 		double sum = 0,currentBiggestComparecValue=0;//initiate double type 'sum' and 'currentBiggestComparecValue' to 0, currentBiggestComparecValue is for comparing current index of sale value
 		int i;//call integer 'i'
-		//for(i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
 		for(i=0;i<team.size();i++) {
 			sum += team.get(i).getmSales();//add mSales to previous value of 'sum'
 			System.out.println(sum);
 			System.out.println("size?"+team.size());
 		}
-		//maverageSales = (sum/numberOfAssociate);//calculate average
 		maverageSales = (sum/team.size());//calculate average
 		System.out.println("Average sales per associate is $"+maverageSales);//print out 'maverageSales' of total associates
 		//for(i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
@@ -74,27 +67,26 @@ public class SalesReporter {//This is public modifier class
 	
 	void displayResults() {//returns nothing
 		int j;//call integer 'j'
-		SalesAssociate tempTeam[] = new SalesAssociate[numberOfAssociate];//instantiate SalesAssociate in array named tempTeam
+		SalesAssociate tempTeam = new SalesAssociate();//instantiate SalesAssociate in array named tempTeam
 		System.out.println("The following had the highest sales ");//informs that will show highest sales
 		System.out.printf("Name : %s\n",team.get(biggestPersonNum).getmName());//print out name which person sales the most
 		System.out.printf("Sales : $%.1f \n",team.get(biggestPersonNum).getmSales());//print out sales that sell the most
 		System.out.printf("$%.1f above the average\n\n",team.get(biggestPersonNum).getmSales()-maverageSales);//print out value above average
-		for(int i=0;i<numberOfAssociate;i++) {//repeat numberOfAssociate times
-			tempTeam[i] = new SalesAssociate();//initiate SalesAssociate array named tempTeam 
-			//for(j=i+1;j<numberOfAssociate;j++) {//loop in loop, repeat (numberOfAssociate-i-1) times
+		for(int i=0;i<team.size();i++) {//repeat numberOfAssociate times
+			tempTeam = new SalesAssociate();//initiate SalesAssociate array named tempTeam 
 			for(j=i+1;j<team.size();j++) {
 				if(team.get(i).getmSales()<team.get(j).getmSales()) {//if current sale figure is smaller than rest
-					tempTeam[i].setmSales(team.get(j).getmSales());//save value to tempTeam temporaily
-					tempTeam[i].setmName(team.get(j).getmName());//save String value to tempTeam temporaily
+					tempTeam.setmSales(team.get(j).getmSales());//save value to tempTeam temporaily
+					tempTeam.setmName(team.get(j).getmName());//save String value to tempTeam temporaily
 					team.get(j).setmSales(team.get(i).getmSales());//input sales value to which has bigger value
 					team.get(j).setmName(team.get(i).getmName());//input String name to which has bigger value
-					team.get(j).setmSales(tempTeam[i].getmSales());//input j index value to current one
-					team.get(j).setmName(tempTeam[i].getmName());;//input j index String value to current one
+					team.get(i).setmSales(tempTeam.getmSales());//input j index value to current one
+					team.get(i).setmName(tempTeam.getmName());;//input j index String value to current one
 				}
 			}
 		}
 		System.out.println("The rest performed as follows : ");//informs that print out following associate according to figure of sales
-		for(int i = 1;i<numberOfAssociate;i++) {//repeat numberOfAssociate-1 times
+		for(int i = 1;i<team.size();i++) {//repeat numberOfAssociate-1 times
 			System.out.printf("Name : %s\n",team.get(i).getmName());//print out Name
 			System.out.printf("Sales : $%.1f \n",team.get(i).getmSales());//print out sales figure
 			System.out.printf("$%.1f above the average\n",team.get(i).getmSales()-maverageSales);//print out how much value above average
