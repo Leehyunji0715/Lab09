@@ -36,9 +36,9 @@ public class SalesReporter {//This is public modifier class
 			forArrayList.setmSales(input.nextInt());
 			input.nextLine();//remove 'enter' by receiving it
 			team.add(forArrayList);
-			System.out.print("Do you want to get additional data? : ");
+			System.out.print("Do you want to get additional data?(Y or N) : ");
 			String ans = input.nextLine ();
-            if (!ans.equalsIgnoreCase ("yes"))
+            if (!ans.equalsIgnoreCase ("Y"))
                 done = true;
 			 i++;
 		}
@@ -51,6 +51,8 @@ public class SalesReporter {//This is public modifier class
 			sum += team.get(i).getmSales();//add mSales to previous value of 'sum'
 			System.out.println(sum);
 			System.out.println("size?"+team.size());
+			System.out.println("name" + team.get(i).getmName());
+
 		}
 		maverageSales = (sum/team.size());//calculate average
 		System.out.println("Average sales per associate is $"+maverageSales);//print out 'maverageSales' of total associates
